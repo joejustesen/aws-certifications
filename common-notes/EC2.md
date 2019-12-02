@@ -4,7 +4,7 @@
 
 - ip address changes on restart
 
-### Payment options
+### Launch Types (Payment options)
 
 - On Demand (linux by the second, Windows by the hour)
   - No long term commitments
@@ -12,9 +12,9 @@
   - Development use
 - Reserved (1 to 3 years in length)
   - Production servers
-  - Standard RI up to 75% off on-demand costs
-  - Convertible RI up to 54% off on-demand costs
-  - Scheduled RI runs in a reserved time window (day, week, month)
+  - **Standard RI** up to 75% off on-demand costs
+  - **Convertible RI** up to 54% off on-demand costs
+  - **Scheduled RI** runs in a reserved time window (day, week, month)
 - Spot (bid a price)
   - Run a low use times
   - Need high performance for a limited time
@@ -23,22 +23,43 @@
   - License needs
   - Can be hourly priced
   - Up to 75% off on-demand
+  - It's your machine
+- Dedicated Instances
+  - multiple instances from same account can run on the same hardware
+  - instance may move between hardware
+  - no access or control over the physical hardware
 
 ### Instance Types
 
-- T2 Lowest Cost, GP [development/testing]
-- M5 GP [Application Servers]
-- I3 High speed storage [DB]
-- G3 Graphics [Video Encoding/Streaming]
+Check out https://EC2Instances.info
+
+- **T2/T3** Lowest Cost, GP, burstable [development/testing]
+- **T2/T3 Unlimited**, GP, infinite burst [development/testing]
+- **M5** GP [Application Servers]
+- **I3** High speed storage [DB]
+- **G3** Graphics [Video Encoding/Streaming]
 - H1 High disk throughput [MapReduce]
 - D2 Dense Storage [Data Warehouse/Hadoop]
 - F1 Field Programmable Gate Array [Analytics]
-- R4 Memory optimized [Memory Intensive/DB]
-- C5 Compute Optimized [CPU Intensive applications]
+- **R4** Memory optimized [Memory Intensive/DB]
+- **C5** Compute Optimized [CPU Intensive applications]
 - P3 GPU [Machine Learning/Bit Coin Mining]
 - X1 Memory Optimized (hugh amount of ram) [SAP/HANNA]
 
-FightDrMcPx - remember instance types....
+**FightDrMcPx** - remember instance types....
+
+## Placement groups
+
+- Cluster
+  - grouped together for low latency network traffic
+  - high speed network
+  - same rack for the most part
+- Spread
+  - mininize failure risk, each ec2 instance is on different physical hardare (Limit to 7 instnaces per AZ placement group)
+- Partition
+  - Spread of Clusters in an AZ
+  - up to 7 partitions
+  - a partition is on a single rack, so ec2 instance in the partition share the same rack.
 
 ## EBS - Elastic Block Storage (attached volumes)
 
@@ -74,3 +95,16 @@ FightDrMcPx - remember instance types....
 
 - can have max of 5 (can be increased)
 - should not use unless required, use DNS or load balancer instead
+
+## AMI - Amazon Machine Image
+
+- can create custom images from existing snapshots
+- created images are only in one region, can be copied to other regions
+- can be private or public
+
+### Cross acount sharing AMI
+
+- can share with other accounts.
+- cannot stop other from take ownership of the AMI.
+- cannot copy a AMI with an associated billingProduct code, but you can create a new instance from the AMI.
+- cannot copy an encrypted AMI, but can create a new instance from a snapshot.

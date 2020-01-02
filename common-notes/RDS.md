@@ -9,6 +9,33 @@
 
 ## Aurora
 
+- primary db instance **read/write**
+- aurora replica **readonly**, up to 15 instances
+- 6 copies over 3 AZs
+  - write 4 copies to succeed
+  - read 3 copies to succeed
+  - failover less than 30 seconds
+- connections/endpoints
+  - cluster endpoint, only writeable endpoint
+  - reader endpoint, automatically load balances reads between aurora replica instances
+  - custom endpoint, load balances based on instances that are members of the customer group
+  - instance endpoint, direct connect to an instance
+- global
+  - primary region **read/write**
+  - secondary regions **readonly**, 1 second data latency
+  - on failure of primary, secondary can be promoted to primary
+- storage
+  - 10 GB up to 64 TB
+  - continuous backups to S3
+  - allows backtrack to point in time
+
+### Serverless
+
+- only allows MySQL
+- no need to select instance size
+- can migrate from Cluster to Serverless
+- DB starts/shutsdown automatically based on CPU/connections
+
 ### Endpoints
 
 - cluster endpoint, connects to the primary DB instance, read and write, uses DNS to identify primary instance, on failover, DNS CNAME is updated to new primary DB instance
@@ -167,6 +194,10 @@
   - can use MFA
   - use DB tech within DB
   - AD for SQL Server
+  - control who can manage RDS
+  - can be used for MySQL and Aurora (NEW)
+  - short lived, (15 minutes), must use over SSL
+  - allows EC2 instance to connect to RDS database
 - encryption at rest
   - free, provided by AWS KMS, no performance impact, uses AES-256
   - replications are also encrypted
@@ -174,6 +205,12 @@
   - can rotate keys, but cannot unencrypt data once encrypted
   - (envelope keys) two tier encryption, master key created by user, each instance has its own key
 - SSL for database connections
+  - force PG: rds.force_ssl = 1
+  - force MySQL: GRANT USAGE ON \*.\* TO 'mysqluser'@'%' REQUIRE SSL;
+- TDE Transparent Data Encryption
+  - only on Sql Server and Oracle
+  - operates on top of KMS
+  - can affect performance
 
 ## Monitoring
 

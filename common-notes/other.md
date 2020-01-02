@@ -84,3 +84,7 @@
   - StringList
   - SecureString
     - Encrypt using KMS key
+
+## CLI
+
+- never use credentials on EC2, use IAM roles

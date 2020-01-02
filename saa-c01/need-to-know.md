@@ -9,6 +9,7 @@ Tips from forums and other exam takers.
 - AWS SWF.
 
 - Screen shot each practice question from AWS (test before hand).
+- docs list https://docs.aws.amazon.com/index.html
 
 ## oldergrrumpieraf
 
@@ -16,7 +17,7 @@ Creating a VPC, configuring the route tables, security groups, launching VMs in 
 
 ### Videos
 
-- AM - https://www.youtube.com/watch?v=YQsK4MtsELU
+- IAM - https://www.youtube.com/watch?v=YQsK4MtsELU
 - VPC - https://www.youtube.com/watch?v=jZAvKgqlrjY
 - VPC - https://www.youtube.com/watch?v=fnxXNZdf6ew
 - DynamoDB - https://www.youtube.com/watch?v=HaEPXoXVf2k

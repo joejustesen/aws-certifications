@@ -3,6 +3,8 @@
 ## EC2 - Elastic Compute Cloud
 
 - ip address changes on restart
+- use golden AMI to speed up startup
+- restore EBS volumns from snapshots for speed
 
 ### Launch Types (Payment options)
 
@@ -108,3 +110,27 @@ Check out https://EC2Instances.info
 - cannot stop other from take ownership of the AMI.
 - cannot copy a AMI with an associated billingProduct code, but you can create a new instance from the AMI.
 - cannot copy an encrypted AMI, but can create a new instance from a snapshot.
+
+## ASG - Auto scaling group
+
+- ASG is free
+- minimum size
+- initial capacity
+- actual size
+- maximum size
+- IAM roles attached to ASgG is assigned to all EC2 instances in the group
+
+### Scaling Alarms
+
+- can use CloudWatch alarms
+- can scale in or out based on alarms
+- can be based on (new rules):
+  - target cpu average
+  - requests per ELB
+  - network in/out
+- can create custom metric using CloudWatch (PutMetric API)
+
+## Meta data
+
+- URL is http://169.254.269.254/latest/meta-data
+- can only be used from EC2 instance

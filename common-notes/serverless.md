@@ -11,10 +11,15 @@
   - Go
   - Powershell
   - Ruby
-- first 1 million requests per month are free
+- first 1 million requests per month are free, plus 400,000 GBs of compute time
 - \$0.20 per next 1 million requests
 - more memory, higher cost
-- X-ray to degug ??
+- X-ray to debug ??
+- limited to 1000 concurrent functions
+- /tmp 512 MB of disk space
+- limit to 50 MB package size (zipped)
+- limit to 250 MB package size deployed
+- environment max 4 KB
 - triggers
   - API Gateway
   - IoT
@@ -36,6 +41,22 @@
   - \$LATEST or alias (PROD/DEV/etc)
   - split traffic between 2 versions by percent (except \$LATEST)
   - cannot modify non \$LATEST versions
+
+## Lambda@Edge
+
+- think CDN for Lambda
+- modify all requests/responses going through CloudFront
+- uses
+  - security
+  - dynamic web application
+  - SEO
+  - routing
+  - bot mitigation
+  - image transform
+  - A/B testing
+  - authentication/authorization
+  - prioritization
+  - user tracking/analytics
 
 ## Serverless Services
 

@@ -20,6 +20,8 @@
   - keys used to store/retieve data based on Primary Key
     - partition key
     - composite key
+- backup point in time, no performance impact
+- global tables, fully replicated, high performance
 
 ## Indices
 
@@ -52,14 +54,6 @@
 - set read and write capacity units (unless set to auto scaling)
 - write capacity unit = 1 KB write per second
 - read capacity unit = 4 KB strong consistent read or 2x4 KB eventually consistent read (default)
-
-## On-Demand Capacity
-
-- don't specify capacity units
-- scales up and down based on activity
-- great for unpredictable workloads, or large spikes
-- pay for what you use
-- can switch once per day (provisioned vs on-demand)
 
 ## DynamoDB Accelerator (DAX)
 
@@ -99,9 +93,21 @@
     - only written data is in the cache
     - possible wasted data if written data is not usually read again
 
-## Transactions
+## New Features
+
+### Transactions
 
 - ACID
+- include up to 10 unique items or 4 MB of data
+
+### On Demand Capacity
+
+- don't specify capacity units
+- scales up and down based on activity
+- great for unpredictable workloads, or large spikes
+- pay for what you use
+- can switch once per day (provisioned vs on-demand)
+- 2.5 x cost
 
 ## TTL - Time To Live
 
@@ -124,6 +130,7 @@
 - different end point for stream
 - recorded in near real time
 - event source for lambda
+- can be used to replicate cross region replication
 
 ## Errors and Exponential Backoff
 

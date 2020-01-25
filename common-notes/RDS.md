@@ -242,7 +242,7 @@
 - AWS CLoudTrail
 - AWS Trusted Advisor
 
-### RDS Elasticache
+## RDS Elasticache
 
 - store critical data in memory
 - redis allows multi-az consistency
@@ -250,17 +250,51 @@
 - memcached auto scaling like EC2 auto scaling
 - read heavy queries
 - not for OLAP, use Redshift instead
+- ELK stack
+- cost per node
 
-#### Memcached
+## Memcached
 
 - simple
 - offline database data
 - scale out
 
-#### Redis
+### Redis
 
 - advanced data types (lists, hashes, sets)
 - pub/sub
 - sorting, ranked datasets like leaderboards
 - persistence
 - multi-az
+
+## Neptune
+
+A graph database.
+
+- cost per node
+
+## Athena
+
+SQL query engine for structured data in S3, uses
+
+- IAM + S3 security
+- performance based on data size
+- cost, per TB of data processed
+
+## Redshift
+
+OLAP database, stores data as columnar
+
+- 10x better performance than other data warehoures
+- MPP (Massively Parrallel Query Execution)
+- uses SQL
+- pay for instances provisionsed
+- BI tools linked to Redshift
+- import data from S3, RDS, or use DMS
+- scales from 1 to 128 nodes, multi-core nodes
+  - leader node
+  - compute nodes
+- Redshift spectrum - used against S3 data directory
+- normal data security
+- Redshift Enhanced VPC routing: data routed though private VPC for better data security
+- cost per node

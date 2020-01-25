@@ -1,74 +1,25 @@
 # Other
 
-## SQS
+## Cognito
 
-- pull based system
-- max 256 KB message size
-- decouples producer and consumer of messages
-- types
-  - standard (default)
-    - unlimited TPS
-    - not ordered, best effort
-    - a least one message deliveried
-  - fifo
-    - ordered perserved
-    - limited to 300 TPS
-- message lifetime 1 minute to 14 days, default is 4 days
-- visiblity timeout, time message is invisible after it has been picked up a reader
-  - default 30 seconds
-  - max 12 hours
-- polling
-  - short polling
-  - long polling
-    - waits for message or timeout
+Provides identity to users
 
-## SNS - Simple Notification Service
-
-- push notification
-  - SMS
-  - email
-  - SQS
-  - HTTP endpoint
-  - lambda function
-- pub/sub model
-- topics
-  - multiple subscribers
-  - stored redundantly
-- pay as you go,
-  - \$0.50 per 1 million requests
-  - \$0.06 per 100,000 HTTP notifications
-  - \$0.75 per 100 SMS notifications
-  - \$2.00 per 100,000 emails
+- User Pools (CUP)
+  - sign in functionality for app users (username/password, mfa)
+  - can enable federated identies from (Facebook, Google, SAML)
+  - sends back JWT
+  - integrated with API Gateway
+- Identity Pools (federated identity)
+  - provides AWS temporary credentials for users to access AWS resources directly
+  - integrated with user pools
+- Sync
+  - sync data it
 
 ## SES - Simple Email Service
 
 - pay as you go
 - can receive emails delivered to S3 bucket
 - incoming emails can trigger lambda or SNS notifications
-
-## Kinesis
-
-- streaming data service
-- load and analyze stream data
-- types of streams
-  - Video
-    - not covered ??
-  - Streams
-    - store for 24 hours (default) up to 7 days
-    - stored in shards
-    - consumers
-      - EC2, Lambda, EMR, Kinesis Data Analytics
-    - a single shard
-      - reads 5 TPS, up to 2 MB per second
-      - writes 1000 TPS, up to 1 MB per second
-      - 10 shards limited per region
-  - Firehose
-    - automated streams
-    - no data retention
-    - data sent to S3 or Elasticsearch Cluster
-  - Analytics
-    - SQL queries of dta
-    - store query results into S3, RedShift, Elasticsearch Cluster
 
 ## Systems Manager Parameter Store
 
@@ -88,3 +39,40 @@
 ## CLI
 
 - never use credentials on EC2, use IAM roles
+
+## Amazon MQ
+
+For migration of existing messaging infrastructure to the cloud
+
+- managed Apache ActiveMQ
+- runs on dedicated machine, but can be HA with failover
+- protocols: MQTT, AMQT, STOMP, Openwire, WSS
+
+## API Gateway
+
+- handles api versioning
+- different environments
+- handles authenticates and authorizatoin
+- limit via api keys, request throttling
+- intergration with Swagger/OpenAPI
+- can cache responses
+- security
+  - IAM permissions (with Sig v4)
+  - Lambda Authorizer returns IAM policy (or called Customer Authorizer)
+    - check token in header
+    - used for OAuth/SAML
+  - Cognito User Pools
+    - authentication, does not support authorization
+
+### Outside VPC
+
+- AWS Lambda
+- EC2 endpoints
+- load balancers
+- any aws service
+- any external http endpoints
+
+### Inside VPC
+
+- AWS Lambda
+- EC2 endpoints
